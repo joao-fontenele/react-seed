@@ -1,0 +1,19 @@
+{
+    "lines": 1,
+    "statements": 60,
+    "functions": 60,
+    "branches": 60,
+    "include": [
+      "app/**/*.js"
+    ],
+    "exclude": [
+     "*.spec.js"
+   ],
+    "reporter": [
+      "text-summary",
+      "lcov"
+    ],
+    "cache": true,
+    "all": true,
+    "check-coverage": true
+}

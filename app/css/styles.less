@@ -1,0 +1,33 @@
+@import "./normalize.css";
+@import "~bootstrap/less/bootstrap.less"; // ~ means webpack will look in node_modules
+
+// I can use variables, if it's value is changed here, the changes will be
+// reflected everywhere it's used
+@label-color: red;
+@default-font-size: 11px;
+
+// this a function, if I call this function, the evaluated styles will
+// be copied to where it's called.
+// note the default values, the defaults work more or less like in python
+.capitalize(@spacing: 5px, @size: @default-font-size) {
+  text-transform: capitalize;
+  letter-spacing: @spacing;
+  font-size: @size;
+}
+
+h1 {
+    color: green;
+}
+
+// rscss style
+.example-form {
+  > .simple-input {
+    > .label {
+      color: @label-color;
+      .capitalize(@size: 15px);
+    }
+  }
+  > .submit {
+    .capitalize();
+  }
+}

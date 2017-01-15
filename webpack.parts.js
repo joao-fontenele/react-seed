@@ -3,6 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const EMBED_IMAGES_SIZE = 50000; // inline images smaller than this value in Kb
+
 exports.devServer = function(options) {
     return {
         devServer: {
@@ -18,6 +20,7 @@ exports.devServer = function(options) {
             // Don't refresh if hot loading fails. If you want
             // refresh behavior, set inline: true instead.
             hotOnly: true,
+            // inline: true,
 
             // Display only errors to reduce the amount of output.
             stats: 'errors-only',
@@ -51,7 +54,12 @@ exports.lintJavaScript = function(paths) {
                     test: /\.js$/,
                     include: paths,
 
-                    use: 'eslint-loader',
+                    use: {
+                        loader: 'eslint-loader',
+                        options: {
+                            quiet: true,
+                        },
+                    },
                     enforce: 'pre',
                 },
             ],
@@ -64,12 +72,21 @@ exports.loadCSS = function(paths) {
         module: {
             rules: [
                 {
-                    test: /\.css$/,
+                    test: /(\.less$)|(\.css$)/,
                     // Restrict extraction process to the given
                     // paths.
                     include: paths,
 
-                    use: ['style-loader', 'css-loader'],
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        'autoprefixer-loader',
+                        'less-loader',
+                    ],
+                },
+                {
+                    test: /\.(svg|ttf|woff|woff2|eot)$/,
+                    loader: `url-loader?limit=${EMBED_IMAGES_SIZE}`,
                 },
             ],
         },
@@ -82,21 +99,40 @@ exports.extractCSS = function(paths) {
             rules: [
                 // Extract CSS during build
                 {
-                    test: /\.css$/,
+                    test: /(\.less$)|(\.css$)/,
                     // Restrict extraction process to the given
                     // paths.
                     include: paths,
 
                     loader: ExtractTextPlugin.extract({
                         fallbackLoader: 'style-loader',
-                        loader: 'css-loader',
+                        loader: 'css-loader!autoprefixer-loader!less-loader',
                     }),
+                },
+                // load fonts before css
+                {
+                    // Match woff2 in addition to patterns like .woff?v=1.1.1.
+                    test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    loader: 'url-loader',
+                    options: {
+                        limit: EMBED_IMAGES_SIZE,
+                        mimetype: 'application/font-woff',
+                        name: 'fonts/[name].[hash].[ext]',
+                    },
+                },
+                {
+                    test: /\.ttf$|\.eot$|\.svg$/,
+                    loader: 'url-loader',
+                    options: {
+                        limit: EMBED_IMAGES_SIZE,
+                        name: 'fonts/[name].[hash].[ext]',
+                    },
                 },
             ],
         },
         plugins: [
             // Output extracted CSS to a file
-            new ExtractTextPlugin('[name].[contenthash].css'),
+            new ExtractTextPlugin('styles/[name].[contenthash].css'),
         ],
     };
 };
@@ -110,6 +146,22 @@ exports.purifyCSS = function(paths) {
                 // Our paths are absolute so Purify needs patching
                 // against that to work.
                 basePath: '/',
+
+                purifyOptions: {
+                    minify: true,
+
+                    /* TODO: there's actually a problem here, i had to whitelist
+                     * everything. To find out what to remove, purify checks the
+                     * html files in the project. But since this is a react app
+                     * the html only have a single div#app. So pretty much
+                     * everything is removed. To work around the issue, i
+                     * allowed everything. Now the only good thing about this
+                     * purify plugin is the minification option above.
+                     */
+                    whitelist: ['*'],
+
+                    // rejected: true, // logs everything that was removed
+                },
 
                 // `paths` is used to point PurifyCSS to files not
                 // visible to Webpack. This expects glob patterns so
@@ -165,8 +217,8 @@ exports.extractBundles = function(bundles, options) {
         plugins: [
             // Extract bundles.
             new webpack.optimize.CommonsChunkPlugin(
-        Object.assign({}, options, { names })
-      ),
+                Object.assign({}, options, {names})
+            ),
         ],
     };
 };
@@ -178,6 +230,7 @@ exports.loadJavaScript = function(paths) {
                 {
                     test: /\.jsx?$/,
                     include: paths,
+                    exclude: /node_modules|\.css$|\.less$/,
 
                     loader: 'babel-loader',
                     options: {
@@ -223,5 +276,28 @@ exports.setFreeVariable = function(key, value) {
         plugins: [
             new webpack.DefinePlugin(env),
         ],
+    };
+};
+
+exports.loadImageFiles = function() {
+    return {
+        module: {
+            loaders: [
+                {
+                    test: /(\.jpe?g$)|(\.png$)/,
+                    use: 'file-loader',
+                    options: {
+                        name: 'assets/[name].[hash].[ext]',
+                    },
+                },
+                {
+                    test: /(\.jpe?g$)|(\.png$)/,
+                    loader: 'url-loader',
+                    options: {
+                        limit: EMBED_IMAGES_SIZE,
+                    },
+                },
+            ],
+        },
     };
 };

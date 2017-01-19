@@ -63,6 +63,7 @@
     "html-webpack-template": "6.0.0",
     "istanbul": "^0.4.5",
     "jsdom": "^9.9.1",
+    "json-server": "^0.9.4",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "mocha": "^3.2.0",

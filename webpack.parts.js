@@ -1,3 +1,4 @@
+const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
@@ -80,7 +81,16 @@ exports.loadCSS = function(paths) {
                     use: [
                         'style-loader',
                         'css-loader',
-                        'autoprefixer-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: function() {
+                                    return [
+                                        autoprefixer,
+                                    ];
+                                },
+                            },
+                        },
                         'less-loader',
                     ],
                 },
@@ -104,10 +114,20 @@ exports.extractCSS = function(paths) {
                     // paths.
                     include: paths,
 
-                    loader: ExtractTextPlugin.extract({
-                        fallbackLoader: 'style-loader',
-                        loader: 'css-loader!autoprefixer-loader!less-loader',
-                    }),
+                    loader: ExtractTextPlugin.extract([
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: function() {
+                                    return [
+                                        autoprefixer,
+                                    ];
+                                },
+                            },
+                        },
+                        'less-loader',
+                    ]),
                 },
                 // load fonts before css
                 {

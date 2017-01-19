@@ -17,7 +17,6 @@
     "static-server": "cd build ; browser-sync start --server --directory --files '**/*' ; cd .."
   },
   "dependencies": {
-    "autoprefixer-loader": "^3.2.0",
     "bluebird": "^3.4.7",
     "bootstrap": "^3.3.7",
     "history": "^4.5.1",
@@ -37,6 +36,7 @@
     "superagent": "^3.3.2"
   },
   "devDependencies": {
+    "autoprefixer": "^6.6.1",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",

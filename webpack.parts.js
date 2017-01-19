@@ -171,7 +171,7 @@ exports.purifyCSS = function(paths) {
                     minify: true,
 
                     /* TODO: there's actually a problem here, i had to whitelist
-                     * everything. To find out what to remove, purify checks the
+                     * everything. To find out what to remove. Purify checks the
                      * html files in the project. But since this is a react app
                      * the html only have a single div#app. So pretty much
                      * everything is removed. To work around the issue, i

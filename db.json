@@ -1,0 +1,51 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "task 1",
+      "dueDate": "2017/02/01",
+      "tags": [
+        "done",
+        "client"
+      ],
+      "projectId": 1
+    },
+    {
+      "id": 2,
+      "name": "task 2",
+      "dueDate": "2017/01/01",
+      "tags": [
+        "client"
+      ],
+      "projectId": 1
+    },
+    {
+      "id": 3,
+      "name": "task 3",
+      "dueDate": "2017/01/29",
+      "tags": [
+        "us",
+        "valid"
+      ],
+      "projectId": 2
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "project 1",
+      "workspaceId": 1
+    },
+    {
+      "id": 2,
+      "name": "project 2",
+      "workspaceId": 2
+    }
+  ],
+  "workspaces": [
+    {
+      "id": 1,
+      "name": "workspace 1"
+    }
+  ]
+}

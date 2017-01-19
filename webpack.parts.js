@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const EMBED_IMAGES_SIZE = 50000; // inline images smaller than this value in Kb
 
@@ -319,5 +320,23 @@ exports.loadImageFiles = function() {
                 },
             ],
         },
+    };
+};
+
+/**
+ * NOTE: apparently, a well configured server can serve compressed files on the
+ * fly, so this plugin could be useless
+ */
+exports.compress = function(test, algorithm='gzip', threshold=0, minRatio=0.8) {
+    return {
+        plugins: [
+            new CompressionPlugin({
+                asset: '[path].gz[query]',
+                algorithm: algorithm,
+                test: test,
+                threshold: threshold,
+                minRatio: minRatio,
+            }),
+        ],
     };
 };

@@ -1,5 +1,7 @@
-const React = require('react');
-const HelpBlock = require('./HelpBlock.react');
+import React from 'react';
+
+import HelpBlock from './HelpBlock.react';
+
 
 const TextInput = React.createClass({
 

@@ -1,4 +1,4 @@
-const TextInput = require('../../app/examples/TextInput.react');
+const TextInput = require('../../app/examples/components/TextInput.react');
 
 const expect  = global.expect,
     it        = global.it,

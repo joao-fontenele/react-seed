@@ -1,6 +1,7 @@
-const React = require('react');
+import React from 'react';
 
-const TextInput = require('appRoot/examples/TextInput.react');
+import TextInput from 'appRoot/examples/components/TextInput.react';
+
 
 const App = React.createClass({
     getInitialState: function() {

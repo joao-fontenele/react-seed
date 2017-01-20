@@ -1,4 +1,5 @@
-const React = require('react');
+import React from 'react';
+
 
 const HelpBlock = React.createClass({
 

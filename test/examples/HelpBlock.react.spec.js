@@ -1,4 +1,4 @@
-const HelpBlock = require('../../app/examples/HelpBlock.react');
+const HelpBlock = require('../../app/examples/components/HelpBlock.react');
 
 const expect    = global.expect,
     it          = global.it,

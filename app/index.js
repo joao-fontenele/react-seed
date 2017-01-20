@@ -1,5 +1,18 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const App = require('appRoot/examples/App.react');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Router, IndexRoute, Route, browserHistory} from 'react-router';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+import App from 'appRoot/examples/components/App.react';
+import MainLayout from 'appRoot/default/components/MainLayout.react';
+
+
+ReactDOM.render(
+    (
+        <Router history={browserHistory}>
+          <Route path="/" component={MainLayout}>
+            <IndexRoute component={App} />
+          </Route>
+        </Router>
+    ),
+    document.getElementById('app')
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, IndexRoute, Route, browserHistory} from 'react-router';
+import {Router, IndexRoute, Route, browserHistory, Redirect} from 'react-router';
 
 import App from 'appRoot/examples/components/App.react';
 import MainLayout from 'appRoot/default/components/MainLayout.react';
@@ -14,6 +14,10 @@ ReactDOM.render(
             <IndexRoute component={App} />
             <Route path="tasks" component={TasksContainer} />
           </Route>
+
+          {/* fallback only works for the 1st /, so /tasks/bad/uri still gives
+          error */}
+          <Redirect from="*" to="/"></Redirect>
         </Router>
     ),
     document.getElementById('app')

@@ -30,3 +30,6 @@ global.expect = expect;
 global.shallow = shallow;
 global.mount = mount;
 global.sinon = sinon;
+
+// disable babel react-transform-hmr transform plugin
+process.env.BABEL_ENV = 'test';

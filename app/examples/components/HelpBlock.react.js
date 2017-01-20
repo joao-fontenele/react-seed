@@ -31,4 +31,4 @@ HelpBlock.propTypes = {
     errorMessage: React.PropTypes.string,
 };
 
-module.exports = HelpBlock;
+export default HelpBlock;

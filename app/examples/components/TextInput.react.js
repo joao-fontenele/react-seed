@@ -76,4 +76,4 @@ TextInput.propTypes = {
     disabled:       React.PropTypes.bool,
 };
 
-module.exports = TextInput;
+export default TextInput;

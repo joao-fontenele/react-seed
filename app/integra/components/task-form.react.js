@@ -55,14 +55,16 @@ const TaskForm = React.createClass({
         this.setState(this.getTaskFromProps());
     },
 
-    onSaveTask: function() {
+    onSaveTask: function(evt) {
+        evt.preventDefault();
         Actions.trigger(SAVE_TASK, this.getTaskFromState());
         if (this.props.index === undefined) {
             this.resyncTask();
         }
     },
 
-    onRemoveTask: function() {
+    onRemoveTask: function(evt) {
+        evt.preventDefault();
         Actions.trigger(REMOVE_TASK, this.getTaskFromProps(false), this.props.index);
     },
 

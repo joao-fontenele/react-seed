@@ -6,17 +6,21 @@ import MainLayout from 'appRoot/default/components/MainLayout.react';
 import TasksContainer from 'appRoot/integra/components/TasksContainer.react';
 
 
-const AppRouter = (
-    <Router history={browserHistory}>
-      <Route path="/" component={MainLayout}>
-        <IndexRoute component={App} />
-        <Route path="tasks" component={TasksContainer} />
-      </Route>
+const AppRouter = React.createClass({
+    render: function() {
+        return (
+          <Router history={browserHistory}>
+            <Route path="/" component={MainLayout}>
+              <IndexRoute component={App} />
+              <Route path="tasks" component={TasksContainer} />
+            </Route>
 
-      {/* fallback only works for the 1st /, so /tasks/bad/uri still gives
-      error */}
-      <Redirect from="*" to="/"></Redirect>
-    </Router>
-);
+            {/* fallback only works for the 1st /, so /tasks/bad/uri still gives
+            error */}
+            <Redirect from="*" to="/"></Redirect>
+          </Router>
+        );
+    },
+});
 
 export default AppRouter;

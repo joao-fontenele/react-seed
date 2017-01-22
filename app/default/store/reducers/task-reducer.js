@@ -12,22 +12,22 @@ const initialState = {
     error: null,
 };
 
-const saveTaskHandler = function(state, action) {
+const editTaskHandler = function(state, action) {
     const id = action.payload.data.id;
-    if (id || id === 0) {
-        const updatedTasks = updateItemInArray(state.tasks, id, (task) => {
-            return updateObject(task, action.payload.promise.body);
-        });
+    const updatedTasks = updateItemInArray(state.tasks, id, (task) => {
+        return updateObject(task, action.payload.promise.body);
+    });
 
-        return updateObject(
-            state,
-            {
-                isRequesting: false,
-                tasks: updatedTasks,
-            }
-        );
-    }
+    return updateObject(
+        state,
+        {
+            isRequesting: false,
+            tasks: updatedTasks,
+        }
+    );
+};
 
+const createTaskHandler = function(state, action) {
     return updateObject(
         state,
         {
@@ -35,6 +35,15 @@ const saveTaskHandler = function(state, action) {
             tasks: state.tasks.concat(action.payload.promise.body),
         }
     );
+};
+
+const saveTaskHandler = function(state, action) {
+    const id = action.payload.data.id;
+    if (id || id === 0) {
+        return editTaskHandler(state, action);
+    }
+
+    return createTaskHandler(state, action);
 };
 
 const removeTaskHandler = function(state, action) {

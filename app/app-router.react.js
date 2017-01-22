@@ -3,7 +3,7 @@ import {Router, IndexRoute, Route, browserHistory, Redirect} from 'react-router'
 
 import App from 'appRoot/examples/components/App.react';
 import MainLayout from 'appRoot/default/components/main-layout.react';
-import TasksContainer from 'appRoot/integra/components/TasksContainer.react';
+import TasksContainer from 'appRoot/integra/components/tasks-container.react';
 
 
 const AppRouter = React.createClass({

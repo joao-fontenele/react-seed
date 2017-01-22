@@ -1,35 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router';
+
+import Header from 'appRoot/default/components/header.react';
+
 
 const MainLayout = React.createClass({
     render: function() {
         return (
             <div className="main-layout container">
-              <nav className="navbar navbar-default navbar-fixed-top">
-                <div className="container">
-                  <ul className="nav nav-tabs">
-                    <li role="presentation">
-                      <Link to="/" activeClassName="active">
-                        Home
-                      </Link>
-                    </li>
+              <Header />
 
-                    <li role="presentation">
-                      <Link to="/tasks" activeClassName="active">
-                        Tasks
-                      </Link>
-                    </li>
-
-                    <li role="presentation">
-                      <Link to="/projects" activeClassName="active">
-                        Projects
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
-
-              <main className="main-content container">
+              <main className="main-content">
                 {this.props.children}
               </main>
             </div>

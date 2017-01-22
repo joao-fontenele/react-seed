@@ -28,6 +28,25 @@
         "valid"
       ],
       "projectId": 2
+    },
+    {
+      "id": 4,
+      "name": "task 4",
+      "dueDate": "2017/01/29",
+      "tags": [
+        "lol",
+        "no-way"
+      ],
+      "projectId": 2
+    },
+    {
+      "id": 5,
+      "name": "task 5",
+      "dueDate": "2017/01/29",
+      "tags": [
+        "valid"
+      ],
+      "projectId": 1
     }
   ],
   "projects": [
@@ -39,7 +58,7 @@
     {
       "id": 2,
       "name": "project 2",
-      "workspaceId": 2
+      "workspaceId": 1
     }
   ],
   "workspaces": [

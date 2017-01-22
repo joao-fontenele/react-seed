@@ -13,10 +13,10 @@ const initialState = {
 };
 
 const saveTaskHandler = function(state, action) {
-    if (action.payload.req.method === 'PUT') {
-        const id = parseInt(action.payload.req.url.split('/').slice(-1), 10);
+    const id = action.payload.data.id;
+    if (id || id === 0) {
         const updatedTasks = updateItemInArray(state.tasks, id, (task) => {
-            return updateObject(task, action.payload.body);
+            return updateObject(task, action.payload.promise.body);
         });
 
         return updateObject(
@@ -27,20 +27,18 @@ const saveTaskHandler = function(state, action) {
             }
         );
     }
+
     return updateObject(
         state,
         {
             isRequesting: false,
-            tasks: state.tasks.concat(action.payload.body),
+            tasks: state.tasks.concat(action.payload.promise.body),
         }
     );
 };
 
 const removeTaskHandler = function(state, action) {
-    // TODO: find a better way to get the task id
-    // ideally it could be returned from the api, but it's not the case with
-    // json-server
-    const id = parseInt(action.payload.req.url.split('/').slice(-1), 10);
+    const id = action.payload.data.id;
 
     return updateObject(
         state,
@@ -56,7 +54,7 @@ const removeTaskHandler = function(state, action) {
 const fetchTasksHandler = function(state, action) {
     return updateObject(
         state,
-        {isRequesting: false, tasks: action.payload.body}
+        {isRequesting: false, tasks: action.payload.promise.body}
     );
 };
 

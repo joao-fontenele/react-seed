@@ -53,3 +53,33 @@ export const createAsyncReducer = function(initialState, handlers) {
         }
     };
 };
+
+/**
+ * given a basic action, an http request and the store to dispatch the async
+ * actions, trigger the async actions (pending, fulfilled, and rejected)
+ */
+export const makeAsyncAction = function(store, actionType, promise, data=null) {
+    store.dispatch({
+        type: actionType + _PENDING,
+    });
+
+    promise
+        .then((response) => {
+            store.dispatch({
+                type: actionType + _FULFILLED,
+                payload: {
+                    promise: response,
+                    data: data,
+                },
+            });
+        })
+        .catch((err) => {
+            store.dispatch({
+                type: actionType + _REJECTED,
+                payload: {
+                    promise: err,
+                    data: data,
+                },
+            });
+        });
+};

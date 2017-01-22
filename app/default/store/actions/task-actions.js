@@ -1,7 +1,9 @@
 import Request from 'superagent';
 
 import store from 'appRoot/default/store/store';
-import {SAVE_TASK, REMOVE_TASK, FETCH_TASKS} from 'appRoot/default/store/actions/action-types';
+import {SAVE_TASK, REMOVE_TASK, FETCH_TASKS}
+    from 'appRoot/default/store/actions/action-types';
+import {makeAsyncAction} from 'appRoot/default/store/utils';
 
 
 const baseEndpoint = 'http://localhost:3000';
@@ -9,7 +11,7 @@ const baseEndpoint = 'http://localhost:3000';
 const Actions = {
     trigger: function(actionType, task) {
         let requisition = null;
-        let tasksEndpoint = `${baseEndpoint}/tasks`;
+        const tasksEndpoint = `${baseEndpoint}/tasks`;
 
         switch (actionType) {
             case SAVE_TASK:
@@ -29,10 +31,7 @@ const Actions = {
                 throw new Error(`invalid actionType: ${actionType}`);
         }
 
-        store.dispatch({
-            type: actionType,
-            payload: requisition,
-        });
+        makeAsyncAction(store, actionType, requisition, task);
     },
 };
 

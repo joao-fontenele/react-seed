@@ -15,8 +15,25 @@
   font-size: @size;
 }
 
-h1 {
-    color: green;
+#app {
+    padding-top: 35px;
+    padding-bottom: 10px
+}
+
+.main-layout {
+  > .navbar {
+      min-height: initial;
+
+      > .container > .nav {
+          border-bottom: 0px;
+      }
+  }
+}
+
+.task-list {
+    > .task-element {
+        margin-bottom: 63px;
+    }
 }
 
 // rscss style

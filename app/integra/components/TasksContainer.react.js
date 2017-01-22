@@ -30,9 +30,9 @@ const TaskContainer = React.createClass({
               <h1 className="home-title col-sm-12">
                 Integra Home
               </h1>
-              <ul className="task-list col-sm-12">
+              <div className="task-list col-sm-12">
                 {this.renderTaskList()}
-              </ul>
+              </div>
 
               <h3 className="col-sm-12">Adicione uma task</h3>
               <TaskForm />

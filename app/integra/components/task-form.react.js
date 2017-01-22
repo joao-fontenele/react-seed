@@ -34,13 +34,6 @@ const TaskForm = React.createClass({
         return this.getTaskFromProps();
     },
 
-    getTaskFromState: function() {
-        return updateObject(
-            this.state,
-            {tags: this.state.tags.split(',')}
-        );
-    },
-
     getTaskFromProps: function(joinTags=true) {
         return {
             id: this.props.id,
@@ -51,6 +44,13 @@ const TaskForm = React.createClass({
         };
     },
 
+    getTaskFromState: function() {
+        return updateObject(
+            this.state,
+            {tags: this.state.tags.split(',')}
+        );
+    },
+
     resyncTask: function() {
         this.setState(this.getTaskFromProps());
     },
@@ -58,7 +58,6 @@ const TaskForm = React.createClass({
     onSaveTask: function() {
         Actions.trigger(SAVE_TASK, this.getTaskFromState());
         if (this.props.index === undefined) {
-            console.log('resync');
             this.resyncTask();
         }
     },
@@ -75,22 +74,22 @@ const TaskForm = React.createClass({
 
     renderControlButtons: function() {
         return (
-          <div className="btn-group col-sm-11 col-sm-offset-1">
-            <button
-              className="btn btn-primary save-button"
-              onClick={this.onSaveTask}
-            >
-              Salvar
-            </button>
-            {this.props.index !== undefined &&
+            <div className="btn-group col-sm-11 col-sm-offset-1">
               <button
-                className="btn btn-danger remove-button"
-                onClick={this.onRemoveTask}
+                className="btn btn-primary save-button"
+                onClick={this.onSaveTask}
               >
-                Remover
+                Salvar
               </button>
-            }
-          </div>
+              {this.props.index !== undefined &&
+                <button
+                  className="btn btn-danger remove-button"
+                  onClick={this.onRemoveTask}
+                >
+                  Remover
+                </button>
+              }
+            </div>
         );
     },
 
@@ -130,16 +129,16 @@ const TaskForm = React.createClass({
         return (
             <form className="task-form form-horizontal">
               {inputs}
+              {this.renderControlButtons()}
             </form>
         );
     },
 
     render: function() {
         return (
-            <li className="row task-element">
+            <div className="task-element">
               {this.renderForm()}
-              {this.renderControlButtons()}
-            </li>
+            </div>
         );
     },
 });

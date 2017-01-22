@@ -6,20 +6,20 @@ const MainLayout = React.createClass({
         return (
             <div className="main-layout">
               <header>
-                <ul className="navbar">
-                  <li>
+                <ul className="nav nav-tabs">
+                  <li role="presentation">
                     <Link to="/" activeClassName="active">
                       Home
                     </Link>
                   </li>
 
-                  <li>
+                  <li role="presentation">
                     <Link to="/tasks" activeClassName="active">
                       Tasks
                     </Link>
                   </li>
 
-                  <li>
+                  <li role="presentation">
                     <Link to="/projects" activeClassName="active">
                       Projects
                     </Link>

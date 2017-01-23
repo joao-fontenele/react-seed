@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server --env development & json-server db.json",
+    "start": "webpack-dev-server --env development & json-server --watch db.json",
     "start:rest": "json-server db.json",
     "test": "mocha --require ./test/helpers/setup.js --compilers js:babel-register -u bdd -R spec --recursive",
     "test:watch": "mocha --require ./test/helpers/setup.js --compilers js:babel-register -u bdd -R spec --recursive --watch",

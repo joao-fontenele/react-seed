@@ -1,70 +1,111 @@
 {
-  "tasks": [
+  "projects": [
     {
       "id": 1,
-      "name": "task 1",
-      "dueDate": "2017/02/01",
-      "tags": [
-        "done",
-        "client"
-      ],
+      "name": "intergration 1"
+    },
+    {
+      "id": 2,
+      "name": "intergration 2"
+    }
+  ],
+  "lists": [
+    {
+      "id": 1,
+      "name": "Kick off",
       "projectId": 1
     },
     {
       "id": 2,
-      "name": "task 2",
-      "dueDate": "2017/01/01",
-      "tags": [
-        "client"
-      ],
+      "name": "Integração Base",
       "projectId": 1
     },
     {
       "id": 3,
-      "name": "task 3",
-      "dueDate": "2017/01/29",
-      "tags": [
-        "us",
-        "valid"
-      ],
-      "projectId": 2
+      "name": "Ativação Produto",
+      "projectId": 1
     },
     {
       "id": 4,
-      "name": "task 4",
-      "dueDate": "2017/01/29",
-      "tags": [
-        "lol",
-        "no-way"
-      ],
-      "projectId": 2
+      "name": "Handover",
+      "projectId": 1
     },
     {
       "id": 5,
-      "name": "task 5",
-      "dueDate": "2017/01/29",
-      "tags": [
-        "valid"
-      ],
-      "projectId": 1
+      "name": "This list shouldn't appear, it's from project 2",
+      "projectId": 2
     }
   ],
-  "projects": [
+  "tasks": [
     {
       "id": 1,
-      "name": "project 1",
-      "workspaceId": 1
+      "name": "Assinatura Proposta Comercial",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 1",
+      "status": "open",
+      "listId": 1,
+      "dependencies": [],
+      "stories": []
     },
     {
       "id": 2,
-      "name": "project 2",
-      "workspaceId": 1
-    }
-  ],
-  "workspaces": [
+      "name": "Dados Cadastrais",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 1",
+      "status": "open",
+      "listId": 1,
+      "dependencies": [1],
+      "stories": []
+    },
     {
-      "id": 1,
-      "name": "workspace 1"
+      "id": 3,
+      "name": "Formulário pré Análise Técnica",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 1",
+      "status": "open",
+      "listId": 1,
+      "dependencies": [2],
+      "stories": []
+    },
+    {
+      "id": 4,
+      "name": "Agenda Kickoff",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 2",
+      "status": "open",
+      "listId": 1,
+      "dependencies": [3],
+      "stories": []
+    },
+    {
+      "id": 5,
+      "name": "Acesso à documentação",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 2",
+      "status": "open",
+      "listId": 1,
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": 6,
+      "name": "Análise Técnica",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 2",
+      "status": "open",
+      "listId": 2,
+      "dependencies": [5],
+      "stories": []
+    },
+    {
+      "id": 7,
+      "name": "Aceite de Escopo",
+      "dueDate": "2017-01-23T19:53:26.249Z",
+      "assignee": "Actor 1",
+      "status": "open",
+      "listId": 2,
+      "dependencies": [],
+      "stories": []
     }
   ]
 }

@@ -8,13 +8,13 @@ import {updateObject, updateItemInArray, createAsyncReducer} from 'appRoot/defau
 
 const initialState = {
     isRequesting: false,
-    tasks: [],
+    lists: [],
     error: null,
 };
 
 const editTaskHandler = function(state, action) {
     const id = action.payload.data.id;
-    const updatedTasks = updateItemInArray(state.tasks, id, (task) => {
+    const updatedTasks = updateItemInArray(state.lists, id, (task) => {
         return updateObject(task, action.payload.promise.body);
     });
 
@@ -22,7 +22,7 @@ const editTaskHandler = function(state, action) {
         state,
         {
             isRequesting: false,
-            tasks: updatedTasks,
+            lists: updatedTasks,
         }
     );
 };
@@ -32,7 +32,7 @@ const createTaskHandler = function(state, action) {
         state,
         {
             isRequesting: false,
-            tasks: state.tasks.concat(action.payload.promise.body),
+            lists: state.lists.concat(action.payload.promise.body),
         }
     );
 };
@@ -53,7 +53,7 @@ const removeTaskHandler = function(state, action) {
         state,
         {
             isRequesting: false,
-            tasks: state.tasks.filter((el) => {
+            lists: state.lists.filter((el) => {
                 return el.id !== id;
             }),
         }
@@ -63,7 +63,7 @@ const removeTaskHandler = function(state, action) {
 const fetchTasksHandler = function(state, action) {
     return updateObject(
         state,
-        {isRequesting: false, tasks: action.payload.promise.body}
+        {isRequesting: false, lists: action.payload.promise.body}
     );
 };
 

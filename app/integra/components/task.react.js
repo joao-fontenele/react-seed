@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from 'react-router';
+
 
 const Task = React.createClass({
     propTypes: {
@@ -10,10 +12,12 @@ const Task = React.createClass({
 
     render: function() {
         return (
-          <div className="task-element">
-            <span className="name">{this.props.name}</span> -
-            <span className="status">{this.props.status}</span>
-          </div>
+          <Link to={`tasks/details/${this.props.id}`}>
+            <div className="task-element">
+              <span className="name">{this.props.name}</span> -
+              <span className="status">{this.props.status}</span>
+            </div>
+          </Link>
         );
     },
 });

@@ -6,7 +6,10 @@ import {SAVE_TASK, REMOVE_TASK, FETCH_TASKS}
 import {makeAsyncAction} from 'appRoot/default/store/utils';
 
 
+// TODO: get from configuration
 const baseEndpoint = 'http://localhost:3000';
+const projectId = 1;
+const fetchEndpoint =  `http://localhost:3000/projects/${projectId}/lists?_embed=tasks`;
 
 const Actions = {
     trigger: function(actionType, task) {
@@ -25,7 +28,7 @@ const Actions = {
                 requisition = Request.del(`${tasksEndpoint}/${task.id}`);
                 break;
             case FETCH_TASKS:
-                requisition = Request.get(tasksEndpoint);
+                requisition = Request.get(fetchEndpoint);
                 break;
             default:
                 throw new Error(`invalid actionType: ${actionType}`);

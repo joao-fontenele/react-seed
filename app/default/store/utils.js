@@ -24,6 +24,13 @@ export const updateItemInArray = function(array, itemId, updateItemCallback) {
     return updatedItems;
 };
 
+export const updateEntitiesObject = function(entity, id, object) {
+    const updatedObject = {};
+    updatedObject[id] = updateObject(entity[id], object);
+
+    return updateObject(entity, updatedObject);
+};
+
 
 /**
  * async reducer boilerplate code

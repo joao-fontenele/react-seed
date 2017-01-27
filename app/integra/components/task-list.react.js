@@ -24,10 +24,10 @@ const TaskList = React.createClass({
     // },
 
     renderTasks: function() {
-        const tasks = this.props.list.tasks.map((el) => {
+        const tasks = this.props.list.tasks.map((id) => {
             return (
-                <li key={el.id}>
-                  <Task {...el} />
+                <li key={id}>
+                  <Task taskId={id} />
                 </li>
             );
         });

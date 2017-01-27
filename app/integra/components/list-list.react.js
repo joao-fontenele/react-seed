@@ -12,7 +12,8 @@ const ListList = React.createClass({
     },
 
     render: function() {
-        const lists = this.props.lists.map((el) => {
+        const lists = Object.keys(this.props.lists).map((key) => {
+            const el = this.props.lists[key];
             return (
                 <TaskList list={el} key={el.id}/>
             );
@@ -28,9 +29,7 @@ const ListList = React.createClass({
 
 const mapStateToProps = function(store) {
     return {
-        lists: store.tasksState.lists,
-        isRequesting: store.tasksState.isRequesting,
-        error: store.tasksState.error,
+        lists: store.lists,
     };
 };
 

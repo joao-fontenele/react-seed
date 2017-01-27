@@ -35,21 +35,13 @@ export const updateEntitiesObject = function(entity, id, object) {
 /**
  * async reducer boilerplate code
  */
-const pendingHandler = function(state) {
-    return updateObject(state, {isRequesting: true});
-};
-
-const rejectedHandler = function(state, action) {
-    return updateObject(state, {error: action.payload});
-};
-
 export const createAsyncReducer = function(initialState, handlers) {
 
     const asyncHandlers = {};
     Object.keys(handlers).forEach((el) => {
-        asyncHandlers[el + _PENDING] = pendingHandler;
+        // asyncHandlers[el + _PENDING] = pendingHandler;
         asyncHandlers[el + _FULFILLED] = handlers[el];
-        asyncHandlers[el + _REJECTED] = rejectedHandler;
+        // asyncHandlers[el + _REJECTED] = rejectedHandler;
     });
 
     return function reducer (state=initialState, action) {
@@ -65,13 +57,18 @@ export const createAsyncReducer = function(initialState, handlers) {
  * given a basic action, an http request and the store to dispatch the async
  * actions, trigger the async actions (pending, fulfilled, and rejected)
  */
-export const makeAsyncAction = function(store, actionType, promise, data=null) {
+export const makeAsyncAction = function(store, actionType, promise,
+                                        data=null, treatResponse) {
     store.dispatch({
         type: actionType + _PENDING,
     });
 
     promise
         .then((response) => {
+            if (typeof(treatResponse) === 'function') {
+                response = treatResponse(response);
+            }
+
             store.dispatch({
                 type: actionType + _FULFILLED,
                 payload: {

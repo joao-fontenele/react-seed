@@ -3,7 +3,9 @@ import loggerMiddleware from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunkMiddleware from 'redux-thunk';
 
-import taskReducer from 'appRoot/default/store/reducers/task-reducer';
+import tasksReducer from 'appRoot/default/store/reducers/tasks-reducer';
+import listsReducer from 'appRoot/default/store/reducers/lists-reducer';
+import uiReducer from 'appRoot/default/store/reducers/ui-reducer';
 
 const middleware = applyMiddleware(
     promiseMiddleware(),
@@ -12,7 +14,9 @@ const middleware = applyMiddleware(
 );
 
 const reducers = combineReducers({
-    tasksState: taskReducer,
+    tasks: tasksReducer,
+    lists: listsReducer,
+    uiState: uiReducer,
 });
 
 const store = createStore(reducers, middleware);
